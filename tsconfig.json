@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "noImplicitAny": true,
+        "strict": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "lib": ["ESNext", "DOM"]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts"
+        //
+    ]
+}

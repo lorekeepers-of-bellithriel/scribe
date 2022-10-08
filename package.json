@@ -1,0 +1,22 @@
+{
+    "name": "scribe",
+    "version": "0.0.1",
+    "description": "Node.js & Browser Logger",
+    "keywords": [
+        "log",
+        "logger",
+        "node",
+        "node.js",
+        "browser"
+    ],
+    "homepage": "https://github.com/lorekeepers-of-bellithriel/scribe",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lorekeepers-of-bellithriel/scribe"
+    },
+    "bugs": {
+        "url": "https://github.com/lorekeepers-of-bellithriel/scribe/issues"
+    },
+    "license": "MIT",
+    "main": "dist/main.js"
+}
