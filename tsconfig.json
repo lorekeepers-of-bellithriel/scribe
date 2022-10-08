@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Node",
         "noImplicitAny": true,
         "strict": true,
         "removeComments": true,
         "sourceMap": true,
-        "lib": ["ESNext", "DOM"]
+        "lib": ["ESNext", "DOM"],
+        "outDir": "dist"
     },
     "include": [
+        // src
         "src/**/*.ts",
         "src/**/*.d.ts"
-        //
     ]
 }
