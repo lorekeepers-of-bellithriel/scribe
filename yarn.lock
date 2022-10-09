@@ -46,6 +46,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^18.8.3":
+  version: 18.8.3
+  resolution: "@types/node@npm:18.8.3"
+  checksum: 9201adc6dc389644c9f478f950ef8926a93e5827865dcd80d7d12fefacab665c96879c87cd6ec74d5eccdd998c4603d02e1e07a35d71a63fe4c20670a381f6ef
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:1, abbrev@npm:^1.0.0":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -940,6 +947,7 @@ __metadata:
   resolution: "scribe@workspace:."
   dependencies:
     "@sindresorhus/is": ^5.3.0
+    "@types/node": ^18.8.3
     browser-or-node: ^2.0.0
     chalk: ^5.1.0
     nodemon: ^2.0.20

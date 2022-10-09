@@ -1,6 +1,6 @@
 {
     "name": "scribe",
-    "version": "0.0.1-alpha",
+    "version": "0.2.0-alpha",
     "description": "Node.js & Browser Logger",
     "keywords": [
         "log",
@@ -26,6 +26,7 @@
     },
     "packageManager": "yarn@3.2.4",
     "devDependencies": {
+        "@types/node": "^18.8.3",
         "nodemon": "^2.0.20",
         "type-fest": "^3.0.0",
         "typescript": "^4.8.4"
