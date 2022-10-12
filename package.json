@@ -1,6 +1,6 @@
 {
-    "name": "scribe",
-    "version": "0.2.0-alpha",
+    "name": "@lorekeepers-of-bellithriel/scribe",
+    "version": "0.3.0-alpha-2",
     "description": "Node.js & Browser Logger",
     "keywords": [
         "log",
@@ -20,9 +20,15 @@
     "license": "MIT",
     "type": "module",
     "main": "dist/main.js",
+    "files": [
+        "dist/main.js",
+        "dist/main.d.ts"
+    ],
+    "types": "dist/main.d.ts",
     "scripts": {
         "tw": "tsc -w",
-        "dev": "nodemon dist/dev.js"
+        "dev": "nodemon dist/dev.js",
+        "publish": "yarn npm publish --access public"
     },
     "packageManager": "yarn@3.2.4",
     "devDependencies": {

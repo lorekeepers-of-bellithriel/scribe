@@ -1,6 +1,7 @@
 import { LogLevels, Scribe } from "./main.js";
 
-const scribe = new Scribe({ level: LogLevels.All });
+const scribe = new Scribe({});
+scribe.trace("test");
 
 console.log("skata");
 

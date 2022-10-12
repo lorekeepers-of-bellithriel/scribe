@@ -12,6 +12,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lorekeepers-of-bellithriel/scribe@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@lorekeepers-of-bellithriel/scribe@workspace:."
+  dependencies:
+    "@sindresorhus/is": ^5.3.0
+    "@types/node": ^18.8.3
+    browser-or-node: ^2.0.0
+    chalk: ^5.1.0
+    nodemon: ^2.0.20
+    type-fest: ^3.0.0
+    typescript: ^4.8.4
+  languageName: unknown
+  linkType: soft
+
 "@npmcli/fs@npm:^2.1.0":
   version: 2.1.2
   resolution: "@npmcli/fs@npm:2.1.2"
@@ -941,20 +955,6 @@ __metadata:
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
   languageName: node
   linkType: hard
-
-"scribe@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "scribe@workspace:."
-  dependencies:
-    "@sindresorhus/is": ^5.3.0
-    "@types/node": ^18.8.3
-    browser-or-node: ^2.0.0
-    chalk: ^5.1.0
-    nodemon: ^2.0.20
-    type-fest: ^3.0.0
-    typescript: ^4.8.4
-  languageName: unknown
-  linkType: soft
 
 "semver@npm:^5.7.1":
   version: 5.7.1
