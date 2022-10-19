@@ -1,6 +1,6 @@
-import { LogLevels, Scribe } from "./main.js";
+import { LogLevels, Scribe } from "./index.js";
 
-const scribe = new Scribe({});
+const scribe = new Scribe();
 scribe.trace("test");
 
 console.log("skata");

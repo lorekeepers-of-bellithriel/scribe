@@ -1,7 +1,7 @@
-import is from "@sindresorhus/is";
-import { isNode } from "browser-or-node";
-import chalk from "chalk";
 import { RequireAtLeastOne } from "type-fest";
+import { isNode } from "browser-or-node";
+import is from "@sindresorhus/is";
+import chalk from "chalk";
 
 const PREFIX = "scribe";
 
@@ -48,7 +48,7 @@ type BaseOptions = {
     pretty: boolean;
 };
 
-export type Options = Partial<BaseOptions>;
+export type Options = RequireAtLeastOne<BaseOptions>;
 
 export type ConfigurationOptions = RequireAtLeastOne<BaseOptions>;
 
@@ -84,9 +84,11 @@ export class Scribe {
     public get inspect() {
         return this._inspect;
     }
-    constructor(options: Options) {
-        this._level = is.undefined(options.level) ? LogLevels.Info : options.level;
-        this._pretty = is.undefined(options.pretty) ? true : options.pretty;
+    constructor(options?: Options) {
+        const level = options?.level;
+        this._level = is.undefined(level) ? LogLevels.Info : level;
+        const pretty = options?.pretty;
+        this._pretty = is.undefined(pretty) ? true : pretty;
         this._logLevelsNameAndColorCollection = {
             [LogLevels.Error]: {
                 name: " ERR  ",
