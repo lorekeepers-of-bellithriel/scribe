@@ -1,7 +1,7 @@
 import { RequireAtLeastOne } from "type-fest";
 import { isNode } from "browser-or-node";
 import is from "@sindresorhus/is";
-import chalk from "chalk";
+import chalk, { ChalkInstance } from "chalk";
 
 const PREFIX = "scribe";
 
@@ -91,46 +91,46 @@ export class Scribe {
         this._pretty = is.undefined(pretty) ? true : pretty;
         this._logLevelsNameAndColorCollection = {
             [LogLevels.Error]: {
-                name: " ERR  ",
+                name: " ERR! ",
                 color: "#F44336",
             },
             [LogLevels.Warn]: {
                 name: " WARN ",
-                color: "#FFC107",
+                color: "#FFA000",
             },
             [LogLevels.Info]: {
                 name: " INFO ",
                 color: "#4CAF50",
             },
             [LogLevels.Trace]: {
-                name: " TRC  ",
+                name: " TRC* ",
                 color: "#00BCD4",
             },
             [LogLevels.Inspect]: {
-                name: " INS  ",
+                name: " INS* ",
                 color: "#9C27B0",
             },
         };
         this._activeLogVariantsCollection = {
             [LogLevels.Error]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Error, this._nodePrefixConstructor, console.error, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Error, this._browserPrefixConstructor, console.error, ...args),
+                node: (...args: unknown[]) => this._scribe(LogLevels.Error, console.error, ...args),
+                browser: (...args: unknown[]) => this._scribe(LogLevels.Error, console.error, ...args),
             },
             [LogLevels.Warn]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Warn, this._nodePrefixConstructor, console.warn, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Warn, this._browserPrefixConstructor, console.warn, ...args),
+                node: (...args: unknown[]) => this._scribe(LogLevels.Warn, console.warn, ...args),
+                browser: (...args: unknown[]) => this._scribe(LogLevels.Warn, console.warn, ...args),
             },
             [LogLevels.Info]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Info, this._nodePrefixConstructor, console.info, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Info, this._browserPrefixConstructor, console.info, ...args),
+                node: (...args: unknown[]) => this._scribe(LogLevels.Info, console.info, ...args),
+                browser: (...args: unknown[]) => this._scribe(LogLevels.Info, console.info, ...args),
             },
             [LogLevels.Trace]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Trace, this._nodePrefixConstructor, console.log, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Trace, this._browserPrefixConstructor, console.log, ...args),
+                node: (...args: unknown[]) => this._scribe(LogLevels.Trace, console.log, ...args),
+                browser: (...args: unknown[]) => this._scribe(LogLevels.Trace, console.log, ...args),
             },
             [LogLevels.Inspect]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Inspect, this._nodePrefixConstructor, console.log, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Inspect, this._browserPrefixConstructor, console.log, ...args),
+                node: (...args: unknown[]) => this._scribe(LogLevels.Inspect, console.log, ...args),
+                browser: (...args: unknown[]) => this._scribe(LogLevels.Inspect, console.log, ...args),
             },
         };
         this._logVariantsCollection = {
@@ -160,19 +160,23 @@ export class Scribe {
             pretty: this._pretty,
         });
     }
-    private _nodePrefixConstructor: PrefixConstructor = (level: UsableLogLevels, text?: string): string => {
+    private _prefixConstructor: PrefixConstructor = (level: UsableLogLevels, text?: string): string => {
         const llnc = this._logLevelsNameAndColorCollection[level];
-        let prefix = this._pretty ? chalk.bgHex(llnc.color).bold(llnc.name) : llnc.name;
-        if (text !== undefined) prefix += ` ${text} `;
+        let prefix: string;
+        if (this._pretty) {
+            let ci: ChalkInstance;
+            if (isNode) ci = chalk.hex(llnc.color);
+            else if (level === LogLevels.Error || level === LogLevels.Warn) ci = chalk;
+            else ci = chalk.hex(llnc.color);
+            prefix = ci.bold(llnc.name);
+            if (text !== undefined) prefix += ci.italic(` ${text} `);
+        } else {
+            prefix = llnc.name;
+            if (text !== undefined) prefix += ` ${text} `;
+        }
         return prefix;
     };
-    private _browserPrefixConstructor: PrefixConstructor = (level: UsableLogLevels, text?: string): string => {
-        const llnc = this._logLevelsNameAndColorCollection[level];
-        let prefix = this._pretty ? `implement` : llnc.name;
-        if (text !== undefined) prefix += ` ${text} `;
-        return prefix;
-    };
-    private _scribe = (level: UsableLogLevels, prefixConstructor: PrefixConstructor, log: typeof console.log, ...args: unknown[]) => {
+    private _scribe = (level: UsableLogLevels, log: typeof console.log, ...args: unknown[]) => {
         let prefix: string;
         let text: string | undefined = undefined;
         const first = args[0];
@@ -180,7 +184,7 @@ export class Scribe {
             text = first;
             args.splice(0, 1);
         }
-        prefix = prefixConstructor(level, text);
+        prefix = this._prefixConstructor(level, text);
         log(prefix, ...args);
     };
     public configure = (options: ConfigurationOptions) => {

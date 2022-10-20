@@ -1,9 +1,12 @@
 import { LogLevels, Scribe } from "./index.js";
 
-const scribe = new Scribe();
-scribe.trace("test");
+const scribe = new Scribe({ level: LogLevels.All, pretty: true });
 
-console.log("skata");
+scribe.error("prefix", "error");
+scribe.warn("prefix", "warn");
+scribe.info("prefix", "info");
+scribe.trace("prefix", "trace");
+scribe.inspect("prefix", "inspect");
 
 // console.time("kappa default-error");
 // for (let i = 0; i < 1000; i++) console.error("error");

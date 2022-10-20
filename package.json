@@ -1,6 +1,6 @@
 {
     "name": "@lorekeepers-of-bellithriel/scribe",
-    "version": "0.4.0-alpha-1",
+    "version": "0.5.4-alpha-1",
     "description": "Node.js & Browser Logger",
     "keywords": [
         "log",
@@ -28,18 +28,19 @@
     "scripts": {
         "tw": "tsc -w",
         "dev": "nodemon dist/dev.js",
+        "tpack": "yarn pack --out ./dist/%s-%v.tgz",
         "publish": "tsc && yarn npm publish --access public"
     },
     "packageManager": "yarn@3.2.4",
     "devDependencies": {
         "@types/node": "^18.8.3",
         "nodemon": "^2.0.20",
-        "type-fest": "^3.0.0",
         "typescript": "^4.8.4"
     },
     "dependencies": {
         "@sindresorhus/is": "^5.3.0",
         "browser-or-node": "^2.0.0",
-        "chalk": "^5.1.0"
+        "chalk": "^5.1.0",
+        "type-fest": "^3.1.0"
     }
 }
