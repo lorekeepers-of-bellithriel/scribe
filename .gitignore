@@ -150,3 +150,10 @@ dist
 
 #? no zero installs
 .pnp.*
+
+#! ############## !#
+#! ### Custom ### !#
+#! ############## !#
+
+build-cache
+test-packs
