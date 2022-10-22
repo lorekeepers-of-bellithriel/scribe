@@ -20,20 +20,12 @@ type Log = {
     (prefix: string, ...args: unknown[]): void;
 };
 
-type ActiveLogVariants = {
-    node: Log;
-    browser: Log;
-};
-
 type UsableLogLevels = Exclude<LogLevels, LogLevels.All | LogLevels.None>;
 type LogLevelsNameAndColorCollection = {
     [key in UsableLogLevels]: {
         name: string;
         color: string;
     };
-};
-type ActiveLogVariantsCollection = {
-    [key in UsableLogLevels]: ActiveLogVariants;
 };
 type LogVariantsCollection = {
     [key in UsableLogLevels]: Log;
@@ -62,7 +54,6 @@ export class Scribe {
         return this._pretty;
     }
     private _logLevelsNameAndColorCollection: LogLevelsNameAndColorCollection;
-    private _activeLogVariantsCollection: ActiveLogVariantsCollection;
     private _logVariantsCollection: LogVariantsCollection;
     private _error: Log;
     public get error() {
@@ -111,44 +102,12 @@ export class Scribe {
                 color: "#9C27B0",
             },
         };
-        this._activeLogVariantsCollection = {
-            [LogLevels.Error]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Error, console.error, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Error, console.error, ...args),
-            },
-            [LogLevels.Warn]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Warn, console.warn, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Warn, console.warn, ...args),
-            },
-            [LogLevels.Info]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Info, console.info, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Info, console.info, ...args),
-            },
-            [LogLevels.Trace]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Trace, console.log, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Trace, console.log, ...args),
-            },
-            [LogLevels.Inspect]: {
-                node: (...args: unknown[]) => this._scribe(LogLevels.Inspect, console.log, ...args),
-                browser: (...args: unknown[]) => this._scribe(LogLevels.Inspect, console.log, ...args),
-            },
-        };
         this._logVariantsCollection = {
-            [LogLevels.Error]: isNode
-                ? this._activeLogVariantsCollection[LogLevels.Error].node //
-                : this._activeLogVariantsCollection[LogLevels.Error].browser,
-            [LogLevels.Warn]: isNode
-                ? this._activeLogVariantsCollection[LogLevels.Warn].node //
-                : this._activeLogVariantsCollection[LogLevels.Warn].browser,
-            [LogLevels.Info]: isNode
-                ? this._activeLogVariantsCollection[LogLevels.Info].node //
-                : this._activeLogVariantsCollection[LogLevels.Info].browser,
-            [LogLevels.Trace]: isNode
-                ? this._activeLogVariantsCollection[LogLevels.Trace].node //
-                : this._activeLogVariantsCollection[LogLevels.Trace].browser,
-            [LogLevels.Inspect]: isNode
-                ? this._activeLogVariantsCollection[LogLevels.Inspect].node //
-                : this._activeLogVariantsCollection[LogLevels.Inspect].browser,
+            [LogLevels.Error]: (...args: unknown[]) => this._scribe(LogLevels.Error, console.error, ...args),
+            [LogLevels.Warn]: (...args: unknown[]) => this._scribe(LogLevels.Warn, console.warn, ...args),
+            [LogLevels.Info]: (...args: unknown[]) => this._scribe(LogLevels.Info, console.info, ...args),
+            [LogLevels.Trace]: (...args: unknown[]) => this._scribe(LogLevels.Trace, console.log, ...args),
+            [LogLevels.Inspect]: (...args: unknown[]) => this._scribe(LogLevels.Inspect, console.log, ...args),
         };
         this._error = disabledLog;
         this._warn = disabledLog;
