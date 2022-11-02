@@ -32,11 +32,11 @@
     },
     "types": "dist/types/index.d.ts",
     "scripts": {
-        "tw": "tsc -w",
-        "dev": "nodemon dist/dev.js",
+        "compile": "tsc -w",
+        "dev": "nodemon dist/dev.js --inspect",
         "tpack": "node ./devops/test-pack.js",
         "build": "node ./devops/build.js",
-        "publish": "node ./devops/publish.js"
+        "publish": "yarn npm publish --access public"
     },
     "packageManager": "yarn@3.2.4",
     "devDependencies": {
