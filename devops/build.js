@@ -13,7 +13,7 @@ const TYPES_FILE_SOURCE = path.join(ESM_DIR, TYPES_FILE_NAME);
 const TYPES_FILE_TARGET = path.join(TYPES_DIR, TYPES_FILE_NAME);
 
 const COMPILE_ESM_COMMAND = "yarn tsc";
-const COMPILE_CJS_COMMAND = "yarn tsc --project ./devops/tsconfig.cjs.json";
+const COMPILE_CJS_COMMAND = "yarn tsc --project ./devops/tsconfig.json";
 
 try {
     // remove previous build directory (if it exists)
