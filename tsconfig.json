@@ -3,16 +3,17 @@
         "module": "ESNext",
         "target": "ESNext",
         "moduleResolution": "NodeNext",
-        "declaration": true,
         "noImplicitAny": true,
         "strict": true,
         "removeComments": true,
+        "declaration": true,
         "lib": ["ESNext", "DOM"],
-        "outDir": "build-cache/esm"
+        "outDir": "dist"
     },
     "include": [
-        // src
+        // source
         "src/**/*.ts",
         "src/**/*.d.ts"
-    ]
+    ],
+    "exclude": ["node_modules"]
 }
