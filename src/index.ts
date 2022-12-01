@@ -1,5 +1,4 @@
 import { RequireAtLeastOne } from "type-fest";
-import { isNode } from "browser-or-node";
 import is from "@sindresorhus/is";
 import chalk, { ChalkInstance } from "chalk";
 
@@ -43,6 +42,8 @@ type BaseOptions = {
 export type Options = RequireAtLeastOne<BaseOptions>;
 
 export type ConfigurationOptions = RequireAtLeastOne<BaseOptions>;
+
+const isNode = process?.versions?.node !== undefined;
 
 export class Scribe {
     private _level: LogLevels;
